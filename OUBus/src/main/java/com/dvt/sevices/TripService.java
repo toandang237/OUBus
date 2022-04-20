@@ -13,6 +13,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -36,5 +38,23 @@ public class TripService {
             }
             return list;
         }
+    }
+    
+    public boolean addTrip(Trip trip) {
+        try (Connection conn = JdbcUtils.getConn()) {
+            String sql = "INSERT INTO trip(id_bus, name) VALUES (?, ?)";
+            PreparedStatement stm = conn.prepareStatement(sql);
+            stm.setInt(1, trip.getId_bus());
+            stm.setString(2, trip.getName());
+            stm.executeUpdate();
+            return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(TripService.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
+    
+    public boolean deleteTrip(int id) {
+        try (Connection conn = Jdb)
     }
 }

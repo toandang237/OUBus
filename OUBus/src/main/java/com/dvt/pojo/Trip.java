@@ -21,6 +21,11 @@ public class Trip {
         this.id_bus = id_bus;
         this.name = name;
     }
+    
+    public Trip(int id_bus, String name) {
+        this.id_bus = id_bus;
+        this.name = name;
+    }
 
     /**
      * @return the id

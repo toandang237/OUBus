@@ -8,6 +8,7 @@ import com.dvt.pojo.Bus;
 import com.dvt.pojo.Trip;
 import com.dvt.sevices.BusService;
 import com.dvt.sevices.TripService;
+import com.dvt.utils.Utils;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -21,8 +22,11 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -39,31 +43,23 @@ public class FXMLManagerController implements Initializable {
     
     @FXML private TableView<Trip> tableTrip;
     @FXML private TextField txtSearch;
-    @FXML private TextField txtIdStrip;
+    @FXML private Label lbIdTrip;
     @FXML private ComboBox<Bus> cbbIdBus;
     @FXML private TextField txtName;
     @FXML private Stage stage;
     @FXML private Scene scene;
-    @Override
+    @Override 
     public void initialize(URL url, ResourceBundle rb) {
         this.loadColumns();
         try {
             this.loadData(null);
             this.loadComboxBox();
-//            this.loadDataFromTableView();
+            this.loadDataFromTableView();
         } catch (SQLException ex) {
             Logger.getLogger(FXMLManagerController.class.getName()).log(Level.SEVERE, null, ex);
         }
         
     }
-    public void logoutHandler(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("FXMLLogin.fxml"));
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(loader.load());
-        stage.setScene(scene);
-        stage.show();
-    }
-    
 //    public void addTripHandler(ActionEvent event) {
 //        
 //    }
@@ -87,6 +83,33 @@ public class FXMLManagerController implements Initializable {
         this.tableTrip.setItems(FXCollections.observableList(S_TRIP.getListTrip(kw)));
     }
     
+    public void loadDataFromTableView() throws SQLException {
+        tableTrip.setRowFactory(r -> {
+            TableRow<Trip> tr = new TableRow<>();
+            tr.setOnMouseClicked(t -> {
+                Trip trip = tableTrip.getSelectionModel().getSelectedItem();
+                if (trip != null) {
+                        try {
+                            Bus bus = S_BUS.getBusById(trip.getId_bus());
+                            cbbIdBus.setPromptText(bus.toString());
+                            lbIdTrip.setText(String.valueOf(trip.getId()));
+                            txtName.setText(trip.getName());
+                        } catch (SQLException ex) {
+                            Logger.getLogger(FXMLManagerController.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                }
+            });
+            return  tr;
+            
+        });
+                
+    }
+    
+    public void loadComboxBox() throws SQLException {
+        cbbIdBus.setItems(FXCollections.observableList(S_BUS.getListBus(null)));
+    }
+    
+    
     public void serachTripHandler(ActionEvent event) {
         String keyWord = this.txtSearch.getText();
         try {
@@ -96,16 +119,38 @@ public class FXMLManagerController implements Initializable {
         }
     }
     
-    public void loadDataFromTableView() throws SQLException {
-        Trip trip = tableTrip.getSelectionModel().getSelectedItem();
-        if (trip != null) {
-            txtIdStrip.setText(String.valueOf(trip.getId()));
-            cbbIdBus.setPromptText(S_BUS.getBusById(trip.getId_bus()).toString());
-            txtName.setText(trip.getName());
-        }
+    public void logoutHandler(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("FXMLLogin.fxml"));
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(loader.load());
+        stage.setScene(scene);
+        stage.show();
     }
     
-    public void loadComboxBox() throws SQLException {
-        cbbIdBus.setItems(FXCollections.observableList(S_BUS.getListBus()));
+    public void busManagermentHandler(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("FXMLBus.fxml"));
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(loader.load());
+        stage.setScene(scene);
+        stage.show();
+    }
+    
+    public void addTripHandler(ActionEvent event) throws SQLException {
+        Bus bus = cbbIdBus.getSelectionModel().getSelectedItem();
+        String name = txtName.getText();
+        int id_bus = bus.getId();
+        if (name.equals("") || bus == null) {
+            Utils.getBox("Trip name and bus id cannot empty!!!", Alert.AlertType.WARNING).show();
+        }
+        else {
+            Trip trip = new Trip(id_bus, name);
+            if (S_TRIP.addTrip(trip)) {
+                Utils.getBox("Add successfull!!!", Alert.AlertType.INFORMATION).show();
+                loadData(null);
+            }
+            else {
+                Utils.getBox("Add failed!!!", Alert.AlertType.WARNING).show();
+            }
+        }
     }
 }

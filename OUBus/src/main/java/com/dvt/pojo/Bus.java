@@ -23,6 +23,12 @@ public class Bus {
         this.license_plate = license_plate;
         this.number_of_seats = number_of_seats;
     }
+    
+    public Bus(String name, String license_plate, int number_of_seats) {
+        this.name = name;
+        this.license_plate = license_plate;
+        this.number_of_seats = number_of_seats;
+    }
 
     /**
      * @return the id
