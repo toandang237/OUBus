@@ -149,7 +149,7 @@ public class FXMLBusController implements Initializable {
             }
         }
         else {
-            Utils.getBox("Select the bus to delete!", Alert.AlertType.WARNING).show();
+            Utils.getBox("Select the bus to delete from table bus!", Alert.AlertType.WARNING).show();
         }
     }
 }

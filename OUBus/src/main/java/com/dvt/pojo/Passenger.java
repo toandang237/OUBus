@@ -8,20 +8,20 @@ package com.dvt.pojo;
  *
  * @author pc
  */
-public class Seat {
+public class Passenger {
     private int id;
     private String name;
-    private int id_bus;
-    private boolean active;//0: have people, 1: haven't
+    private String email;
+    private String phone_number;
 
-    public Seat() {
-    }
-
-    public Seat(int id, String name, int id_bus, boolean active) {
+    public Passenger(int id, String name, String email, String phone_number) {
         this.id = id;
         this.name = name;
-        this.id_bus = id_bus;
-        this.active = active;
+        this.email = email;
+        this.phone_number = phone_number;
+    }
+
+    public Passenger() {
     }
 
     /**
@@ -39,45 +39,45 @@ public class Seat {
     }
 
     /**
-     * @return the name
+     * @return the nameString
      */
     public String getName() {
         return name;
     }
 
     /**
-     * @param name the name to set
+     * @param nameString the nameString to set
      */
     public void setName(String name) {
         this.name = name;
     }
 
     /**
-     * @return the id_bus
+     * @return the email
      */
-    public int getId_bus() {
-        return id_bus;
+    public String getEmail() {
+        return email;
     }
 
     /**
-     * @param id_bus the id_bus to set
+     * @param email the email to set
      */
-    public void setId_bus(int id_bus) {
-        this.id_bus = id_bus;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     /**
-     * @return the active
+     * @return the phone_number
      */
-    public boolean isActive() {
-        return active;
+    public String getPhone_number() {
+        return phone_number;
     }
 
     /**
-     * @param active the active to set
+     * @param phone_number the phone_number to set
      */
-    public void setActive(boolean active) {
-        this.active = active;
+    public void setPhone_number(String phone_number) {
+        this.phone_number = phone_number;
     }
     
     

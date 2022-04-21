@@ -57,11 +57,13 @@ public class FXMLLoginController implements Initializable {
             if (S.checkAccount(username, password)) {
                 if (user.getUserRole()) {
                     scene = new Scene(staffLoader.load());
-                    
-//                    stage.setResizable(false);
-//                    stage.centerOnScreen();
+                    FXMLStaffController staffController = staffLoader.getController();
+                    staffController.setUser(user);
+                    staffController.load();
+                    stage.setResizable(false);
+                    stage.centerOnScreen();
                     stage.setScene(scene);
-                    stage.show();
+//                    stage.show();
                 }
                 else {
                     scene = new Scene(managerLoader.load());

@@ -101,12 +101,12 @@
                            <HBox.margin>
                               <Insets bottom="5.0" left="5.0" right="20.0" top="5.0" />
                            </HBox.margin></Label>
-                        <TextField fx:id="txtName" styleClass="text" />
+                        <TextField fx:id="txtName" prefHeight="26.0" prefWidth="262.0" styleClass="text" />
                      </children>
                   </HBox>
                   <HBox focusTraversable="true" maxWidth="-Infinity" minHeight="-Infinity" styleClass="hboxInput">
                      <children>
-                        <Label cacheShape="false" centerShape="false" contentDisplay="CENTER" focusTraversable="false" graphicTextGap="10.0" scaleShape="false" styleClass="lbLP" text="LICENSE PLATE">
+                        <Label cacheShape="false" centerShape="false" contentDisplay="CENTER" focusTraversable="false" graphicTextGap="10.0" prefHeight="27.0" prefWidth="110.0" scaleShape="false" styleClass="lbLP" text="LICENSE PLATE">
                            <HBox.margin>
                               <Insets bottom="5.0" left="5.0" right="20.0" top="5.0" />
                            </HBox.margin></Label>
@@ -132,18 +132,6 @@
                         <ImageView fitHeight="35.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" styleClass="buttonAddConfirm">
                            <image>
                               <Image url="@../img/AddButton.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                     <HBox.margin>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                     </HBox.margin>
-                  </Button>
-                  <Button mnemonicParsing="false" prefWidth="100.0" styleClass="buttonEdit">
-                     <graphic>
-                        <ImageView fitHeight="35.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" styleClass="buttonEdit">
-                           <image>
-                              <Image url="@../img/EditButton.png" />
                            </image>
                         </ImageView>
                      </graphic>

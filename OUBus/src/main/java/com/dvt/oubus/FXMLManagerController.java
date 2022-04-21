@@ -23,6 +23,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
@@ -151,6 +152,50 @@ public class FXMLManagerController implements Initializable {
             else {
                 Utils.getBox("Add failed!!!", Alert.AlertType.WARNING).show();
             }
+        }
+    }
+    
+    public void deleteTripHandler(ActionEvent event) throws SQLException {
+        Trip trip = tableTrip.getSelectionModel().getSelectedItem();
+        if (trip != null) {
+            if (Utils.getBox("Are you sure want to delete trip have id = " + trip.getId(), Alert.AlertType.CONFIRMATION).showAndWait().get() == ButtonType.OK) {
+                if (S_TRIP.deleteTrip(trip.getId())) {
+                    Utils.getBox("Delete successful!", Alert.AlertType.INFORMATION).show();
+                    this.loadData(null);
+                }
+                else {
+                    Utils.getBox("Delete failed!", Alert.AlertType.WARNING).show();
+                }
+            }
+        }
+        else {
+            Utils.getBox("Select the trip to delete from table trip!", Alert.AlertType.WARNING).show();
+        }
+    }
+    
+    public void updateTripHandler(ActionEvent event) throws SQLException {
+        Trip trip = tableTrip.getSelectionModel().getSelectedItem();
+        if (trip != null) {
+            Bus bus = cbbIdBus.getSelectionModel().getSelectedItem();
+            if (bus != null) {
+                String name = txtName.getText();
+                int id_bus = bus.getId();
+                if (Utils.getBox("Are you sure want to update trip have id = " + trip.getId(), Alert.AlertType.CONFIRMATION).showAndWait().get() == ButtonType.OK) {
+                    if (S_TRIP.updateTrip(trip.getId(), id_bus, name)) {
+                        Utils.getBox("Update successful!", Alert.AlertType.INFORMATION).show();
+                        this.loadData(null);
+                    }
+                    else {
+                        Utils.getBox("Update failed!", Alert.AlertType.WARNING).show();
+                    }
+                }
+            }
+            else {
+                Utils.getBox("Select the bus id!", Alert.AlertType.WARNING).show();
+            }
+        }
+        else {
+            Utils.getBox("Please select the trip from table trip!", Alert.AlertType.WARNING).show();
         }
     }
 }

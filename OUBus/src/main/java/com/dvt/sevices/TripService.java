@@ -6,7 +6,6 @@ package com.dvt.sevices;
 
 import com.dvt.pojo.Trip;
 import com.dvt.utils.JdbcUtils;
-import com.dvt.utils.Utils;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -40,6 +39,18 @@ public class TripService {
         }
     }
     
+    public Trip getTripById(int id) throws SQLException {
+        try (Connection conn = JdbcUtils.getConn()) {
+            PreparedStatement stm = conn.prepareStatement("SELECT * FROM trip WHERE id = ?");
+            stm.setInt(1, id);
+            ResultSet rs = stm.executeQuery();
+            if (rs.next()) {
+                return new Trip(rs.getInt("id"), rs.getInt("id_bus"), rs.getString("name"));
+            }
+            return null;
+        }
+    }
+    
     public boolean addTrip(Trip trip) {
         try (Connection conn = JdbcUtils.getConn()) {
             String sql = "INSERT INTO trip(id_bus, name) VALUES (?, ?)";
@@ -54,7 +65,21 @@ public class TripService {
         return false;
     }
     
-    public boolean deleteTrip(int id) {
-        try (Connection conn = Jdb)
+    public boolean deleteTrip(int id) throws SQLException {
+        try (Connection conn = JdbcUtils.getConn()) {
+            PreparedStatement stm = conn.prepareStatement("DELETE FROM trip WHERE id = ?");
+            stm.setInt(1, id);
+            return stm.executeUpdate() > 0;
+        }
+    }
+    
+    public boolean updateTrip(int id, int id_bus, String name) throws SQLException {
+        try (Connection conn = JdbcUtils.getConn()) {
+            PreparedStatement stm = conn.prepareStatement("UPDATE trip SET name = ?, id_bus = ? WHERE id = ?");
+            stm.setString(1, name);
+            stm.setInt(2, id_bus);
+            stm.setInt(3, id);
+            return stm.executeUpdate() > 0;
+        }
     }
 }

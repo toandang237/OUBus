@@ -124,7 +124,7 @@
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </HBox.margin>
                   </Button>
-                  <Button mnemonicParsing="false" prefWidth="100.0" styleClass="buttonEdit">
+                  <Button mnemonicParsing="false" onAction="#updateTripHandler" prefWidth="100.0" styleClass="buttonEdit">
                      <graphic>
                         <ImageView fitHeight="35.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" styleClass="buttonEdit">
                            <image>
@@ -136,7 +136,7 @@
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </HBox.margin>
                   </Button>
-                  <Button mnemonicParsing="false" prefWidth="100.0" styleClass="buttonEdit">
+                  <Button mnemonicParsing="false" onAction="#deleteTripHandler" prefWidth="100.0" styleClass="buttonEdit">
                      <graphic>
                         <ImageView fitHeight="35.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" styleClass="buttonDelete">
                            <image>

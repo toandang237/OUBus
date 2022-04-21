@@ -1,9 +1,13 @@
+C:\Users\pc\Desktop\OUBus\OUBus\src\main\java\com\dvt\sevices\PassengerService.java
 C:\Users\pc\Desktop\OUBus\OUBus\src\main\java\com\dvt\sevices\UserSevices.java
 C:\Users\pc\Desktop\OUBus\OUBus\src\main\java\com\dvt\pojo\Trip.java
 C:\Users\pc\Desktop\OUBus\OUBus\src\main\java\com\dvt\pojo\User.java
+C:\Users\pc\Desktop\OUBus\OUBus\src\main\java\com\dvt\oubus\FXMLSellTicketController.java
+C:\Users\pc\Desktop\OUBus\OUBus\src\main\java\com\dvt\sevices\SeatService.java
 C:\Users\pc\Desktop\OUBus\OUBus\src\main\java\com\dvt\oubus\FXMLStaffController.java
 C:\Users\pc\Desktop\OUBus\OUBus\src\main\java\com\dvt\oubus\FXMLBusController.java
 C:\Users\pc\Desktop\OUBus\OUBus\src\main\java\com\dvt\sevices\TripService.java
+C:\Users\pc\Desktop\OUBus\OUBus\src\main\java\com\dvt\pojo\Ticket.java
 C:\Users\pc\Desktop\OUBus\OUBus\src\main\java\com\dvt\utils\JdbcUtils.java
 C:\Users\pc\Desktop\OUBus\OUBus\src\main\java\com\dvt\pojo\Seat.java
 C:\Users\pc\Desktop\OUBus\OUBus\src\main\java\com\dvt\oubus\FXMLManagerController.java
@@ -12,4 +16,6 @@ C:\Users\pc\Desktop\OUBus\OUBus\src\main\java\module-info.java
 C:\Users\pc\Desktop\OUBus\OUBus\src\main\java\com\dvt\oubus\FXMLLoginController.java
 C:\Users\pc\Desktop\OUBus\OUBus\src\main\java\com\dvt\oubus\App.java
 C:\Users\pc\Desktop\OUBus\OUBus\src\main\java\com\dvt\sevices\BusService.java
+C:\Users\pc\Desktop\OUBus\OUBus\src\main\java\com\dvt\sevices\TicketService.java
 C:\Users\pc\Desktop\OUBus\OUBus\src\main\java\com\dvt\pojo\Bus.java
+C:\Users\pc\Desktop\OUBus\OUBus\src\main\java\com\dvt\pojo\Passenger.java
