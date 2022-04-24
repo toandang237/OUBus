@@ -16,9 +16,8 @@ public class Ticket {
     private int passenger_id;
     private int staff_id;
     private int seat_id;
-    private String depature;
+    private String departure;
     private String destination;
-    private Date date;
     private double price;
     private String passenger_name;
     private String trip_name;
@@ -27,15 +26,24 @@ public class Ticket {
     public Ticket() {
     }
 
-    public Ticket(int id, int trip_id, int passenger_id, int staff_id, int seat_id, String depature, String destination, Date date, double price) {
+    public Ticket(int id, int trip_id, int passenger_id, int staff_id, int seat_id, String departure, String destination, double price) {
         this.id = id;
         this.trip_id = trip_id;
         this.passenger_id = passenger_id;
         this.staff_id = staff_id;
         this.seat_id = seat_id;
-        this.depature = depature;
+        this.departure = departure;
         this.destination = destination;
-        this.date = date;
+        this.price = price;
+    }
+    
+    public Ticket(int trip_id, int passenger_id, int staff_id, int seat_id, String departure, String destination, double price) {
+        this.trip_id = trip_id;
+        this.passenger_id = passenger_id;
+        this.staff_id = staff_id;
+        this.seat_id = seat_id;
+        this.departure = departure;
+        this.destination = destination;
         this.price = price;
     }
 
@@ -110,17 +118,17 @@ public class Ticket {
     }
 
     /**
-     * @return the depature
+     * @return the departure
      */
-    public String getDepature() {
-        return depature;
+    public String getDeparture() {
+        return departure;
     }
 
     /**
-     * @param depature the depature to set
+     * @param departure the departure to set
      */
-    public void setDepature(String depature) {
-        this.depature = depature;
+    public void setDeparture(String departure) {
+        this.departure = departure;
     }
 
     /**
@@ -136,21 +144,6 @@ public class Ticket {
     public void setDestination(String destination) {
         this.destination = destination;
     }
-
-    /**
-     * @return the date
-     */
-    public Date getDate() {
-        return date;
-    }
-
-    /**
-     * @param date the date to set
-     */
-    public void setDate(Date date) {
-        this.date = date;
-    }
-
     /**
      * @return the price
      */
@@ -219,6 +212,11 @@ public class Ticket {
      */
     public void setStaff_name(String staff_name) {
         this.staff_name = staff_name;
+    }
+
+    @Override
+    public String toString() {
+        return "Passenger id: " + passenger_id + " - Passenger name: " + passenger_name + " - Trip name: " + trip_name; // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
     }
     
     

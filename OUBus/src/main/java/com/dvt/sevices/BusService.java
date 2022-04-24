@@ -83,7 +83,10 @@ public class BusService {
     public boolean deleteBus(int id) throws SQLException {
         try (Connection conn = JdbcUtils.getConn()) {
             PreparedStatement stm = conn.prepareStatement("DELETE FROM bus WHERE id = ?");
+            PreparedStatement stm1 = conn.prepareStatement("DELETE FROM seat WHERE id_bus = ?");
             stm.setInt(1, id);
+            stm1.setInt(1, id);
+            stm1.executeUpdate();
             return stm.executeUpdate() > 0;
         }
     }

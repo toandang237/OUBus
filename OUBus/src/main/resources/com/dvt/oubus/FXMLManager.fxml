@@ -3,6 +3,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
@@ -13,7 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="330.0" prefWidth="800.0" stylesheets="@../../../styles/fxmlmanager.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.dvt.oubus.FXMLManagerController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="330.0" prefWidth="800.0" stylesheets="@../../../styles/fxmlmanager.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.dvt.oubus.FXMLManagerController">
    <left>
       <VBox prefHeight="400.0" prefWidth="100.0" styleClass="vBoxLogo" BorderPane.alignment="CENTER">
          <children>
@@ -62,7 +63,7 @@
    <right>
       <VBox prefHeight="500.0" prefWidth="120.0" styleClass="vBoxAction" stylesheets="@../../../styles/fxmlmanager.css" BorderPane.alignment="TOP_LEFT">
          <children>
-            <VBox maxHeight="-Infinity" prefHeight="220.0" prefWidth="232.0" styleClass="contains">
+            <VBox maxHeight="-Infinity" prefHeight="220.0" prefWidth="200.0" styleClass="contains">
                <children>
                   <HBox prefHeight="112.0" prefWidth="200.0" styleClass="hboxSearch">
                      <children>
@@ -108,9 +109,21 @@
                         <TextField fx:id="txtName" maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="126.0" styleClass="txtName" />
                      </children>
                   </HBox>
+                  <HBox layoutX="10.0" layoutY="159.0" prefHeight="100.0" prefWidth="200.0" styleClass="hboxInput">
+                     <children>
+                        <Label maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" text="DATE" />
+                        <DatePicker fx:id="datePicker" prefHeight="26.0" prefWidth="125.0" />
+                     </children>
+                  </HBox>
+                  <HBox layoutX="10.0" layoutY="176.0" prefHeight="78.0" prefWidth="200.0" styleClass="hboxInput">
+                     <children>
+                        <Label maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" text="TIME" />
+                        <TextField fx:id="txtTime" maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="126.0" styleClass="txtName" />
+                     </children>
+                  </HBox>
                </children>
             </VBox>
-            <HBox maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="200.0" styleClass="hboxButton">
+            <HBox maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="59.0" prefWidth="200.0" styleClass="hboxButton">
                <children>
                   <Button mnemonicParsing="false" onAction="#addTripHandler" prefWidth="100.0" styleClass="buttonAdd">
                      <graphic>

@@ -7,8 +7,8 @@ package com.dvt.oubus;
 import com.dvt.pojo.Ticket;
 import com.dvt.pojo.User;
 import com.dvt.sevices.TicketService;
+import java.io.IOException;
 import java.net.URL;
-import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,13 +16,18 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -33,6 +38,8 @@ public class FXMLStaffController implements Initializable {
     private static final TicketService S_TICKET = new TicketService();
     private User user;
     
+    @FXML private Stage stage;
+    @FXML private Scene scene;
     @FXML private TableView<Ticket> tableTickets;
     @FXML private TableColumn<Ticket, Integer> columnTicketID;
     @FXML private TableColumn<Ticket, String> columnPassengerName;
@@ -41,8 +48,7 @@ public class FXMLStaffController implements Initializable {
     @FXML private TableColumn<Ticket, String> columnStaffName;
     @FXML private TableColumn<Ticket, String> columnDeparture;
     @FXML private TableColumn<Ticket, String> columnDestination;
-    @FXML private TableColumn<Ticket, Date> columnDate;
-    @FXML private TableColumn<Ticket, Double> price;
+    @FXML private TableColumn<Ticket, Double> columnPrice;
     @FXML private TextField txtPassengerName;
     
     @FXML private Label lbUser;
@@ -53,7 +59,7 @@ public class FXMLStaffController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         try {
             this.loadColumn();
-            this.loadData(null);
+            this.loadData("");
         } catch (SQLException ex) {
             Logger.getLogger(FXMLStaffController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -77,8 +83,9 @@ public class FXMLStaffController implements Initializable {
         columnTripName.setCellValueFactory(new PropertyValueFactory<>("trip_name"));
         columnSeat.setCellValueFactory(new PropertyValueFactory<>("seat"));
         columnStaffName.setCellValueFactory(new PropertyValueFactory<>("staff_name"));
-        columnDeparture.setCellValueFactory(new PropertyValueFactory<>("daparture"));
+        columnDeparture.setCellValueFactory(new PropertyValueFactory<>("departure"));
         columnDestination.setCellValueFactory(new PropertyValueFactory<>("destination"));
+        columnPrice.setCellValueFactory(new PropertyValueFactory<>("price"));
     }
     
     public void loadData(String kw) throws SQLException {
@@ -91,13 +98,42 @@ public class FXMLStaffController implements Initializable {
         tableTickets.setItems(FXCollections.observableList(list));
     }
     
-    public User getUser() {
-        return user;
+    public void sellTicketHandler(ActionEvent event) throws IOException {
+        FXMLLoader sellTicketLoader = new FXMLLoader(getClass().getResource("FXMLSellTickets.fxml"));
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(sellTicketLoader.load());
+        FXMLSellTicketController controller = sellTicketLoader.getController();
+        controller.setUser(user);
+        controller.load();
+        stage.setResizable(false);
+        stage.centerOnScreen();
+        stage.setScene(scene);
+        stage.show();
     }
-
-    /**
-     * @param user the user to set
-     */
+    
+    public void logoutHandler(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("FXMLLogin.fxml"));
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(loader.load());
+        stage.setResizable(false);
+        stage.centerOnScreen();
+        stage.setScene(scene);
+        stage.show();
+    }
+    
+    public void bookTicketHandler(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("FXMLOrderTicket.fxml"));
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(loader.load());
+        FXMLOrderTicketController controller = loader.getController();
+        controller.setUser(user);
+        controller.load();
+        stage.setResizable(false);
+        stage.centerOnScreen();
+        stage.setScene(scene);
+        stage.show();
+    }
+     
     public void setUser(User user) {
         this.user = user;
     }

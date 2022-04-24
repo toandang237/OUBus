@@ -27,14 +27,11 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
     -fx-pref-height: 40;
     -fx-alignment: CENTER_LEFT;
 }
-.lableLastName, .lableFirstName, .labelSex, .labelPhone, .labelAddress{
+.lableLastName, .lableFirstName, .labelSex, .labelPhone, .labelAddress, .labelSeat, .labelTime{
     -fx-pref-width: 75;
     -fx-font-weight: bold;
 }
-.labelSeat{
-    -fx-pref-width: 40;
-    -fx-font-weight: bold;
-}
+
 .hBoxButton{
     -fx-pref-height: 40;
     -fx-alignment: CENTER;
@@ -54,7 +51,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
 .textFieldSeat{
     -fx-pref-width: 120;
 }
-.comboBoxSex{
+.comboBox{
     -fx-pref-width: 170;
 }
 .textPassInfo{
@@ -104,13 +101,23 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
     -fx-spacing: 10;
     -fx-pref-height: 40;
 }
-.labelSearch{
-    -fx-pref-width: 35;
+.labelTripName{
+    -fx-pref-width: 70;
+    -fx-font-weight: bold;
+}
+
+.lbDate {
+    -fx-pref-width: 40;
     -fx-font-weight: bold;
 }
 .inputSearch{
     -fx-pref-width: 170;
 }
 .buttonSearch{
+    -fx-font-weight: bold;
+}
+
+.labelSearchTicket {
+    -fx-pref-width: 100;
     -fx-font-weight: bold;
 }

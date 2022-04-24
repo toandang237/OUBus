@@ -33,13 +33,22 @@ public class SeatService {
     
     public Seat getSeatById(int id) throws SQLException {
         try (Connection conn = JdbcUtils.getConn()) {
-            PreparedStatement stm = conn.prepareStatement("SELECT * FROM Seat WHERE id = ?");
+            PreparedStatement stm = conn.prepareStatement("SELECT * FROM seat WHERE id = ?");
             stm.setInt(1, id);
             ResultSet rs = stm.executeQuery();
             if (rs.next()) {
                 return new Seat(rs.getInt("id"), rs.getString("name"), rs.getInt("id_bus"), rs.getBoolean("active"));
             }
             return null;
+        }
+    }
+    
+    public boolean updateSeatStatus(int id, boolean b) throws SQLException {
+        try (Connection conn = JdbcUtils.getConn()) {
+            PreparedStatement stm = conn.prepareStatement("UPDATE seat SET active = ? WHERE id = ?");
+            stm.setBoolean(1, b);
+            stm.setInt(2, id);
+            return stm.executeUpdate() > 0;
         }
     }
 }

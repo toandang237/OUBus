@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="1000.0" stylesheets="@../../../styles/fxmlstaff.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.dvt.oubus.FXMLStaffController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="1209.0" stylesheets="@../../../styles/fxmlstaff.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.dvt.oubus.FXMLStaffController">
    <children>
       <VBox prefHeight="400.0" prefWidth="100.0" styleClass="vBoxLogo" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -35,10 +35,10 @@
                </VBox.margin>
             </ImageView>
             <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textOUBUS" text="OU BUS" />
-            <Button mnemonicParsing="false" styleClass="buttonTicket" text="Sell ticket" />
-            <Button layoutX="59.0" layoutY="287.0" mnemonicParsing="false" styleClass="buttonTicket" text="Book ticket" />
+            <Button mnemonicParsing="false" onAction="#sellTicketHandler" styleClass="buttonTicket" text="Sell ticket" />
+            <Button layoutX="59.0" layoutY="287.0" mnemonicParsing="false" onAction="#bookTicketHandler" styleClass="buttonTicket" text="Book ticket" />
             <Button layoutX="59.0" layoutY="377.0" mnemonicParsing="false" styleClass="buttonTicket" text="Cancel &amp; Change" />
-            <Button layoutX="59.0" layoutY="422.0" mnemonicParsing="false" styleClass="buttonTicket" text="Log out" />
+            <Button layoutX="59.0" layoutY="422.0" mnemonicParsing="false" onAction="#logoutHandler" styleClass="buttonTicket" text="Log out" />
          </children>
       </VBox>
       <HBox layoutX="151.0" prefHeight="100.0" prefWidth="849.0" styleClass="hBoxFillter" AnchorPane.leftAnchor="151.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -51,17 +51,15 @@
             <TextField fx:id="txtPassengerName" prefHeight="26.0" prefWidth="217.0" promptText="Enter passenger name ..." />
          </children>
       </HBox>
-      <TableView fx:id="tableTickets" layoutX="151.0" layoutY="40.0" prefHeight="460.0" prefWidth="755.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="151.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0">
+      <TableView fx:id="tableTickets" layoutX="151.0" layoutY="40.0" onSort="#logoutHandler" prefHeight="460.0" prefWidth="849.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="151.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0">
         <columns>
           <TableColumn fx:id="columnTicketID" prefWidth="75.0" styleClass="columnID" text="ID" />
           <TableColumn fx:id="columnPassengerName" prefWidth="75.0" styleClass="columnPassengerName" text="Passenger name" />
             <TableColumn fx:id="columnTripName" prefWidth="75.0" styleClass="columnTripName" text="Trip name" />
             <TableColumn fx:id="columnStaffName" prefWidth="75.0" styleClass="columnTripName" text="Staff name" />
-            <TableColumn fx:id="columnSeat" prefWidth="75.0" styleClass="columnTripName" text="Seat" />
-            <TableColumn fx:id="columnDeparture" prefWidth="75.0" styleClass="columnOrther" text="Departure" />
+            <TableColumn fx:id="columnSeat" prefWidth="123.60003662109375" styleClass="columnTripName" text="Seat" />
+            <TableColumn fx:id="columnDeparture" prefWidth="126.39996337890625" styleClass="columnOrther" text="Departure" />
             <TableColumn fx:id="columnDestination" prefWidth="41.5999755859375" styleClass="columnOrther" text="Destination" />
-            <TableColumn fx:id="columnDate" prefWidth="158.4000244140625" styleClass="columnOrther" text="Date" />
-            <TableColumn fx:id="columnTime" prefWidth="75.0" styleClass="columnOrther" text="Time" />
             <TableColumn fx:id="columnPrice" prefWidth="75.0" styleClass="columnOrther" text="Price" />
         </columns>
       </TableView>

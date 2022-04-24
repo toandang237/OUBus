@@ -6,8 +6,6 @@ module com.dvt.oubus {
     requires org.apache.commons.codec;
 
     opens com.dvt.oubus to javafx.fxml;
+    opens com.dvt.pojo to javafx.base;
     exports com.dvt.oubus;
-    exports com.dvt.pojo;
-    exports com.dvt.sevices;
-    exports com.dvt.utils;
 }

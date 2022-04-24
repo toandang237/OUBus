@@ -7,7 +7,6 @@ package com.dvt.sevices;
 import com.dvt.pojo.Ticket;
 import com.dvt.utils.JdbcUtils;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -37,9 +36,8 @@ public class TicketService {
                 int seat_id = rs.getInt("seat_id");
                 String depature = rs.getString("departure");
                 String destination = rs.getString("destination");
-                Date time = rs.getDate("time");
                 double price = rs.getDouble("price");
-                Ticket ticket = new Ticket(id, trip_id, passenger_id, staff_id, seat_id, depature, destination, time, price);
+                Ticket ticket = new Ticket(id, trip_id, passenger_id, staff_id, seat_id, depature, destination, price);
                 ticket.setPassenger_name(S_PASSENGER.getPassengerById(passenger_id).getName());
                 ticket.setStaff_name(S_User.getUserById(staff_id).getName());
                 ticket.setTrip_name(S_TRIP.getTripById(trip_id).getName());
@@ -47,6 +45,20 @@ public class TicketService {
                 list.add(ticket);
             }
             return list;
+        }
+    }
+    
+    public boolean addTicket(Ticket t) throws SQLException {
+        try (Connection conn = JdbcUtils.getConn()) {
+            PreparedStatement stm = conn.prepareStatement("INSERT INTO ticket(trip_id, passenger_id, staff_id, seat_id, departure, destination, price) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+            stm.setInt(1, t.getTrip_id());
+            stm.setInt(2, t.getPassenger_id());
+            stm.setInt(3, t.getSeat_id());
+            stm.setInt(4, t.getSeat_id());
+            stm.setString(5, t.getDeparture());
+            stm.setString(6, t.getDestination());
+            stm.setDouble(7, t.getPrice());
+            return stm.executeUpdate() > 0;
         }
     }
 }
