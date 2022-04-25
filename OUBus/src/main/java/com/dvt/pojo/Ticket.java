@@ -23,10 +23,12 @@ public class Ticket {
     private String trip_name;
     private String seat;
     private String staff_name;
+    private boolean status;
+    
     public Ticket() {
     }
 
-    public Ticket(int id, int trip_id, int passenger_id, int staff_id, int seat_id, String departure, String destination, double price) {
+    public Ticket(int id, int trip_id, int passenger_id, int staff_id, int seat_id, String departure, String destination, double price, boolean status) {
         this.id = id;
         this.trip_id = trip_id;
         this.passenger_id = passenger_id;
@@ -35,9 +37,10 @@ public class Ticket {
         this.departure = departure;
         this.destination = destination;
         this.price = price;
+        this.status = status;
     }
     
-    public Ticket(int trip_id, int passenger_id, int staff_id, int seat_id, String departure, String destination, double price) {
+    public Ticket(int trip_id, int passenger_id, int staff_id, int seat_id, String departure, String destination, double price, boolean status) {
         this.trip_id = trip_id;
         this.passenger_id = passenger_id;
         this.staff_id = staff_id;
@@ -45,6 +48,7 @@ public class Ticket {
         this.departure = departure;
         this.destination = destination;
         this.price = price;
+        this.status = status;
     }
 
     /**
@@ -217,6 +221,20 @@ public class Ticket {
     @Override
     public String toString() {
         return "Passenger id: " + passenger_id + " - Passenger name: " + passenger_name + " - Trip name: " + trip_name; // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
+    }
+
+    /**
+     * @return the status
+     */
+    public boolean isStatus() {
+        return status;
+    }
+
+    /**
+     * @param status the status to set
+     */
+    public void setStatus(boolean status) {
+        this.status = status;
     }
     
     

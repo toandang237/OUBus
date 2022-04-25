@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="518.0" prefWidth="357.0" stylesheets="@../../../styles/style_login.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.dvt.oubus.FXMLLoginController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="518.0" prefWidth="357.0" stylesheets="@../../../styles/style_login.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.dvt.oubus.FXMLLoginController">
    <children>
       <HBox prefHeight="100.0" prefWidth="200.0">
          <children>
@@ -23,7 +23,7 @@
       </HBox>
       <Label styleClass="Subject" stylesheets="@../../../styles/style_login.css" text="Login" />
       <Label layoutX="10.0" layoutY="160.0" styleClass="lbWrite" text="Username:" />
-      <TextField fx:id="txtUsername" promptText="Username" text="tien" />
+      <TextField fx:id="txtUsername" promptText="Username" text="toan" />
       <Label layoutX="10.0" layoutY="178.0" styleClass="lbWrite" text="Password:" />
       <PasswordField fx:id="txtPassword" prefHeight="35.0" promptText="Password" text="123" />
       <HBox prefHeight="40.0" prefWidth="350.0">

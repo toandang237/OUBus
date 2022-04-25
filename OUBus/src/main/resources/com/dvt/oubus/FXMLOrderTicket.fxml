@@ -91,7 +91,7 @@
                         <Insets left="10.0" />
                      </HBox.margin>
                   </Label>
-                  <TextField fx:id="textFieldLastName" promptText="Enter full name..." styleClass="textFieldInfo" />
+                  <TextField fx:id="textFieldFullName" promptText="Enter full name..." styleClass="textFieldInfo" />
                </children>
             </HBox>
             <HBox layoutX="10.0" layoutY="110.0" prefHeight="100.0" prefWidth="200.0" styleClass="hBoxSex">
@@ -101,7 +101,7 @@
                         <Insets left="10.0" />
                      </HBox.margin>
                   </Label>
-                  <ComboBox fx:id="cbbSeats" editable="true" prefHeight="26.0" prefWidth="168.0" styleClass="comboBox" />
+                  <ComboBox fx:id="cbbSeats" prefHeight="26.0" prefWidth="169.0" />
                </children>
             </HBox>
             <HBox layoutX="10.0" layoutY="95.0" prefHeight="100.0" prefWidth="200.0" styleClass="hBoxSex">
@@ -121,7 +121,7 @@
                         <Insets left="10.0" />
                      </HBox.margin>
                   </Label>
-                  <TextField fx:id="textFieldSeat1" promptText="Enter email..." styleClass="textFieldInfo" />
+                  <TextField fx:id="textFieldEmail" promptText="Enter email..." styleClass="textFieldInfo" />
                </children>
             </HBox>
          </children>

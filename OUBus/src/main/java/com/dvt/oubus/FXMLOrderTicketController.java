@@ -4,7 +4,6 @@
  */
 package com.dvt.oubus;
 
-import com.dvt.pojo.Bus;
 import com.dvt.pojo.Passenger;
 import com.dvt.pojo.Seat;
 import com.dvt.pojo.Ticket;
@@ -18,7 +17,6 @@ import com.dvt.utils.Utils;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
-import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -76,6 +74,7 @@ public class FXMLOrderTicketController implements Initializable {
     @FXML private TextField textFieldEmail;
     @FXML private Stage stage;
     @FXML private Scene scene;
+    private Seat seat = null;
     /**
      * Initializes the controller class.
      */
@@ -88,8 +87,14 @@ public class FXMLOrderTicketController implements Initializable {
             this.loadData(null);
             this.loadTripFromTable();
         } catch (SQLException ex) {
-            Logger.getLogger(FXMLSellTicketController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(FXMLOrderTicketController.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        cbbSeats.valueProperty().addListener((obs, val1, val2) -> {
+            if (val2 != null) {
+                seat = val2;
+            }
+        });
     }    
     
     public void loadColumns() {
@@ -135,6 +140,9 @@ public class FXMLOrderTicketController implements Initializable {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("FXMLStaff.fxml"));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(loader.load());
+        FXMLStaffController controller = loader.getController();
+        controller.setUser(User);
+        controller.load();
         stage.setResizable(false);
         stage.centerOnScreen();
         stage.setTitle("Staff");
@@ -157,11 +165,16 @@ public class FXMLOrderTicketController implements Initializable {
         textFieldPrice.setText("");
     }
     
+    /**
+     *
+     * @param event
+     * @throws SQLException
+     */
     public void bookHandler(ActionEvent event) throws SQLException {
         Trip trip = tableTrip.getSelectionModel().getSelectedItem();
-        String id = cbbSeats.getPromptText().split(" ")[4];
-        int seat_id = Integer.parseInt(id);
-        Seat seat = S_SEAT.getSeatById(seat_id);
+//        String id = cbbSeats.getPromptText().split(" ")[4];
+//        int seat_id = Integer.parseInt(id);
+//        Seat seat = S_SEAT.getSeatById(seat_id);
         int staff_id = Integer.parseInt(lbId.getText());
         if (trip != null) {
             if (seat != null) {
@@ -172,26 +185,26 @@ public class FXMLOrderTicketController implements Initializable {
                     String phone = textFieldPhone.getText();
                     String email = textFieldEmail.getText();
                     double price = Double.parseDouble(textFieldPrice.getText());
-                    if (Utils.getBox("Ticket sales confirmation?", Alert.AlertType.CONFIRMATION).showAndWait().get() == ButtonType.OK) {
+                    if (Utils.getBox("Ticket book confirmation?", Alert.AlertType.CONFIRMATION).showAndWait().get() == ButtonType.OK) {
                         if (S_PASSENGER.addPassenger(new Passenger(fullName, email, phone))) {
                             List<Passenger> list = S_PASSENGER.getListPassenger();
                             Passenger p = list.get(list.size() - 1);
-                            if (S_TICKET.addTicket(new Ticket(trip.getId(), p.getId(), staff_id, seat.getId(), departure, destination, price)) 
+                            if (S_TICKET.addTicket(new Ticket(trip.getId(), p.getId(), staff_id, seat.getId(), departure, destination, price, false)) 
                                     && S_SEAT.updateSeatStatus(seat.getId(), true)) {
-                                
+                                cbbSeats.setItems(FXCollections.observableList(S_SEAT.getListSeatByIdBus(tableTrip.getSelectionModel().getSelectedItem().getId_bus())));
                                 Utils.getBox("Book successful!", Alert.AlertType.INFORMATION).show();
                             }
                             else {
-                                Utils.getBox("Book Failed!", Alert.AlertType.WARNING).show();
+                                Utils.getBox("Book Failed!", Alert.AlertType.ERROR).show();
                             }
                         }
                         else {
-                            Utils.getBox("Book Failed!", Alert.AlertType.WARNING).show();
+                            Utils.getBox("Book Failed!", Alert.AlertType.ERROR).show();
                         }
                     }
                 }
                 else {
-                    Utils.getBox("Please enter full booking information and customer information!", Alert.AlertType.WARNING).show();
+                    Utils.getBox("Please enter full ticket selling information and customer information!", Alert.AlertType.WARNING).show();
                 }
             }
             else {
@@ -199,7 +212,7 @@ public class FXMLOrderTicketController implements Initializable {
             }
         }
         else {
-            Utils.getBox("Please choose a trip!", Alert.AlertType.WARNING).show();
+            Utils.getBox("Please choose a trip on trip table!", Alert.AlertType.WARNING).show();
         }
     }
 

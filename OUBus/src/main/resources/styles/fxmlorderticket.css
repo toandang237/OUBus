@@ -54,9 +54,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
 .textFieldSeat{
     -fx-pref-width: 120;
 }
-.comboBoxSex{
-    -fx-pref-width: 170;
-}
+
 .textPassInfo{
     -fx-font-size: 18;
     -fx-font-weight: bold;

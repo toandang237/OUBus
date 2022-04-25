@@ -3,7 +3,6 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
-<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -16,7 +15,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1009.0" stylesheets="@../../../styles/fxmlorderticket.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.dvt.oubus.FXMLOrderTicketController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1200.0" stylesheets="@../../../styles/fxmlchangeandcancelticket.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.dvt.oubus.FXMLChangeAndCancelTicketController">
    <children>
       <VBox prefHeight="500.0" prefWidth="143.0" styleClass="vBoxLogo" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -47,37 +46,26 @@
       </VBox>
       <HBox layoutX="150.0" prefHeight="100.0" prefWidth="200.0" styleClass="hBoxSearch" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Label prefHeight="18.0" prefWidth="58.0" styleClass="labelTripName" text="Trip name:">
+            <Label prefHeight="18.0" prefWidth="130.0" styleClass="labelTripName" text="Passenger name:">
                <HBox.margin>
                   <Insets left="10.0" />
                </HBox.margin>
             </Label>
-            <TextField fx:id="txtTripName" promptText="Enter name trip..." />
-            <Label styleClass="labelDate" text="Date:" />
-            <DatePicker fx:id="datePickerSearch" editable="false" promptText="Select date..." showWeekNumbers="true" styleClass="datePickerDate" />
-            <Button mnemonicParsing="false" onAction="#searchTripHandler" text="Search">
-               <graphic>
-                  <ImageView fitHeight="19.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../img/loupe.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </Button>
+            <TextField fx:id="txtPassengerName" prefHeight="26.0" prefWidth="179.0" promptText="Enter passenger name..." />
          </children>
       </HBox>
-      <TableView fx:id="tableTrip" layoutX="150.0" layoutY="115.0" prefHeight="175.0" prefWidth="663.0" AnchorPane.bottomAnchor="290.0" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0">
+      <TableView fx:id="tableSellTicket" layoutX="150.0" layoutY="115.0" prefHeight="175.0" prefWidth="663.0" AnchorPane.bottomAnchor="290.0" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0">
          <columns>
-            <TableColumn fx:id="columnID" prefWidth="75.0" styleClass="columnTicketsID" text="ID" />
-            <TableColumn fx:id="columnTripName" prefWidth="170.39999389648438" styleClass="columnTripName" text="Trip name" />
-            <TableColumn fx:id="columnBusName" prefWidth="149.60006713867188" styleClass="columnAll" text="Bus name" />
-            <TableColumn fx:id="columnLicensePlates" prefWidth="75.0" styleClass="columnAll" text="License plates" />
-            <TableColumn fx:id="columnNumberOfSeats" prefWidth="75.0" styleClass="columnAll" text="Number of seats" />
-            <TableColumn fx:id="columnDate" prefWidth="75.0" styleClass="columnAll" text="Date" />
-            <TableColumn fx:id="columnTime" prefWidth="75.0" styleClass="columnAll" text="Time" />
+            <TableColumn fx:id="columnID" styleClass="columnTicketsID" text="ID TICKET" />
+            <TableColumn fx:id="columnPassengerName" prefWidth="189.59999084472656" styleClass="columnTripName" text="Passenger name" />
+            <TableColumn fx:id="columnTripName" styleClass="columnTicketsID" text="Trip name" />
+            <TableColumn fx:id="columnDeparture" prefWidth="75.0" styleClass="columnAll" text="Departure" />
+            <TableColumn fx:id="columnDestination" prefWidth="75.0" styleClass="columnAll" text="Destination" />
+            <TableColumn fx:id="columnPrice" prefWidth="75.0" styleClass="columnAll" text="Price" />
+            <TableColumn fx:id="columnStatus" prefWidth="75.0" styleClass="columnAll" text="Status" />
          </columns>
       </TableView>
-      <VBox fx:id="cbbTrip" layoutX="500.0" layoutY="309.0" prefHeight="300.0" prefWidth="398.0" styleClass="vBoxInfoPass" AnchorPane.bottomAnchor="60.60000000000002" AnchorPane.rightAnchor="158.60000000000002">
+      <VBox fx:id="cbbTrip" layoutX="150.0" layoutY="300.0" prefHeight="300.0" prefWidth="526.0" styleClass="vBoxInfoPass" AnchorPane.bottomAnchor="60.0" AnchorPane.rightAnchor="0.0">
          <children>
             <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textPassInfo" text="PASSENGER INFORMATION">
                <VBox.margin>
@@ -86,12 +74,18 @@
             </Text>
             <HBox prefHeight="100.0" prefWidth="200.0" styleClass="hBoxLastName">
                <children>
-                  <Label styleClass="labelFullName" text="Full Name:">
+                  <Label styleClass="lableLastName" text="Full Name:">
                      <HBox.margin>
                         <Insets left="10.0" />
                      </HBox.margin>
                   </Label>
                   <TextField fx:id="textFieldFullName" promptText="Enter full name..." styleClass="textFieldInfo" />
+                  <Label styleClass="labelPhone" text="Phone:">
+                     <HBox.margin>
+                        <Insets left="10.0" />
+                     </HBox.margin>
+                  </Label>
+                  <TextField fx:id="textFieldPhone" promptText="Enter phone number..." styleClass="textFieldInfo" />
                </children>
             </HBox>
             <HBox layoutX="10.0" layoutY="110.0" prefHeight="100.0" prefWidth="200.0" styleClass="hBoxSex">
@@ -101,22 +95,8 @@
                         <Insets left="10.0" />
                      </HBox.margin>
                   </Label>
-                  <ComboBox fx:id="cbbSeats" prefHeight="26.0" prefWidth="169.0" />
-               </children>
-            </HBox>
-            <HBox layoutX="10.0" layoutY="95.0" prefHeight="100.0" prefWidth="200.0" styleClass="hBoxSex">
-               <children>
-                  <Label styleClass="labelPhone" text="Phone:">
-                     <HBox.margin>
-                        <Insets left="10.0" />
-                     </HBox.margin>
-                  </Label>
-                  <TextField fx:id="textFieldPhone" promptText="Enter phone number..." styleClass="textFieldInfo" />
-               </children>
-            </HBox>
-            <HBox layoutX="10.0" layoutY="145.0" prefHeight="100.0" prefWidth="200.0" styleClass="hBoxSex">
-               <children>
-                  <Label styleClass="labelEmail" text="Email:">
+                  <ComboBox fx:id="cbbSeats" editable="true" prefWidth="150.0" styleClass="comboBox" />
+                  <Label styleClass="labelSeat" text="Email:">
                      <HBox.margin>
                         <Insets left="10.0" />
                      </HBox.margin>
@@ -126,7 +106,7 @@
             </HBox>
          </children>
       </VBox>
-      <VBox layoutX="150.0" layoutY="509.0" prefHeight="300.0" prefWidth="286.0" styleClass="vBoxInfoTicket" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="150.0">
+      <VBox layoutX="150.0" layoutY="509.0" prefHeight="300.0" prefWidth="526.0" styleClass="vBoxInfoTicket" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="150.0">
          <children>
             <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textTicketsInfo" text="TICKET INFOMATION">
                <VBox.margin>
@@ -141,6 +121,12 @@
                      </HBox.margin>
                   </Label>
                   <TextField fx:id="textFieldTrip" styleClass="textFieldInfoTickets" />
+                  <Label styleClass="labelPrice" text="Price:">
+                     <HBox.margin>
+                        <Insets left="10.0" />
+                     </HBox.margin>
+                  </Label>
+                  <TextField fx:id="textFieldPrice" prefHeight="25.0" prefWidth="425.0" styleClass="textFieldInfoTickets" />
                </children>
             </HBox>
             <HBox layoutX="10.0" layoutY="27.0" prefHeight="100.0" prefWidth="200.0" styleClass="hBoxDeparture">
@@ -163,23 +149,13 @@
                   <TextField fx:id="textFieldDestination" styleClass="textFieldInfoTickets" />
                </children>
             </HBox>
-            <HBox layoutX="10.0" layoutY="145.0" prefHeight="100.0" prefWidth="200.0" styleClass="hBoxDate">
-               <children>
-                  <Label styleClass="labelDestination" text="Price:">
-                     <HBox.margin>
-                        <Insets left="10.0" />
-                     </HBox.margin>
-                  </Label>
-                  <TextField fx:id="textFieldPrice" styleClass="textFieldInfoTickets" />
-               </children>
-            </HBox>
          </children>
       </VBox>
       <HBox layoutX="150.0" layoutY="740.0" prefHeight="100.0" prefWidth="200.0" styleClass="hBoxButton" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="0.0">
          <children>
-            <Button layoutX="595.0" layoutY="10.0" mnemonicParsing="false" onAction="#bookHandler" styleClass="buttonAction" text="Book" />
-            <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#resetHandler" styleClass="buttonAction" text="Reset" />
-            <Button layoutX="62.0" layoutY="10.0" mnemonicParsing="false" onAction="#backHandler" styleClass="buttonAction" text="Back" />
+            <Button layoutX="595.0" layoutY="10.0" mnemonicParsing="false" styleClass="buttonAction" text="Sell &amp; Print" />
+            <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" styleClass="buttonAction" text="Reset" />
+            <Button layoutX="62.0" layoutY="10.0" mnemonicParsing="false" styleClass="buttonAction" text="Back" />
          </children>
       </HBox>
    </children>

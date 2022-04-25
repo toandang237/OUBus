@@ -25,7 +25,9 @@ public class SeatService {
             ResultSet rs = stm.executeQuery();
             List<Seat> list = new ArrayList<>();
             while (rs.next()) {
-                list.add(new Seat(rs.getInt("id"), rs.getString("name"), rs.getInt("id_bus"), rs.getBoolean("active")));
+                if (!rs.getBoolean("active")) {
+                    list.add(new Seat(rs.getInt("id"), rs.getString("name"), rs.getInt("id_bus"), rs.getBoolean("active")));
+                }
             }
             return list;
         }

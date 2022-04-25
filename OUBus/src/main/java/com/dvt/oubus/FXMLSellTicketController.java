@@ -4,11 +4,16 @@
  */
 package com.dvt.oubus;
 
+import com.dvt.pojo.Passenger;
 import com.dvt.pojo.Seat;
+import com.dvt.pojo.Ticket;
 import com.dvt.pojo.Trip;
 import com.dvt.pojo.User;
+import com.dvt.sevices.PassengerService;
 import com.dvt.sevices.SeatService;
+import com.dvt.sevices.TicketService;
 import com.dvt.sevices.TripService;
+import com.dvt.utils.Utils;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -26,6 +31,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
@@ -44,6 +51,9 @@ import javafx.stage.Stage;
 public class FXMLSellTicketController implements Initializable {
     private static final TripService S_TRIP = new TripService();
     private static final SeatService S_SEAT = new SeatService();
+    private static final TicketService S_TICKET = new TicketService();
+    private static final PassengerService S_PASSENGER = new PassengerService();
+    
     private User User;
     @FXML private DatePicker datePickerSearch;
     @FXML private DatePicker datePickerDate;
@@ -68,6 +78,7 @@ public class FXMLSellTicketController implements Initializable {
     @FXML private TextField textFieldEmail;
     @FXML private Stage stage;
     @FXML private Scene scene;
+    private Seat seat = null;
     /**
      * Initializes the controller class.
      */
@@ -90,17 +101,22 @@ public class FXMLSellTicketController implements Initializable {
                 Logger.getLogger(FXMLSellTicketController.class.getName()).log(Level.SEVERE, null, ex);
             }
         });
+        
+        cbbSeats.valueProperty().addListener((obs, val1, val2) -> {
+            if (val2 != null) {
+                seat = val2;
+            }
+        });
     }
     
-    @SuppressWarnings("unchecked")
     public void loadColumns() {
-        columnID.setCellValueFactory(new PropertyValueFactory("id"));
-        columnTripName.setCellValueFactory(new PropertyValueFactory("name"));
-        columnBusName.setCellValueFactory(new PropertyValueFactory("bus_name"));
-        columnLicensePlates.setCellValueFactory(new PropertyValueFactory("license_plates"));
-        columnNumberOfSeats.setCellValueFactory(new PropertyValueFactory("number_of_seats"));
-        columnDate.setCellValueFactory(new PropertyValueFactory("date"));
-        columnTime.setCellValueFactory(new PropertyValueFactory("time"));
+        columnID.setCellValueFactory(new PropertyValueFactory<>("id"));
+        columnTripName.setCellValueFactory(new PropertyValueFactory<>("name"));
+        columnBusName.setCellValueFactory(new PropertyValueFactory<>("bus_name"));
+        columnLicensePlates.setCellValueFactory(new PropertyValueFactory<>("license_plates"));
+        columnNumberOfSeats.setCellValueFactory(new PropertyValueFactory<>("number_of_seats"));
+        columnDate.setCellValueFactory(new PropertyValueFactory<>("date"));
+        columnTime.setCellValueFactory(new PropertyValueFactory<>("time"));
     }
     
     public void loadData(String kw) throws SQLException {
@@ -129,6 +145,52 @@ public class FXMLSellTicketController implements Initializable {
             return  tr;
             
         });
+    }
+    
+    public void sellAndPrintTicketHandler(ActionEvent event) throws SQLException, IOException {
+        Trip trip = tableSellTicket.getSelectionModel().getSelectedItem();
+        int staff_id = Integer.parseInt(lbId.getText());
+        if (trip != null) {
+            if (seat != null) {
+                if (!"".equals(textFieldDeparture.getText()) && !"".equals(textFieldDestination.getText()) && !"".equals(textFieldPrice.getText()) && !"".equals(textFieldPhone.getText()) && !"".equals(textFieldEmail.getText())) {
+                    String departure = textFieldDeparture.getText();
+                    String destination = textFieldDestination.getText();
+                    String fullName = textFieldFullName.getText();
+                    String phone = textFieldPhone.getText();
+                    String email = textFieldEmail.getText();
+                    double price = Double.parseDouble(textFieldPrice.getText());
+                    if (Utils.getBox("Ticket sales confirmation?", Alert.AlertType.CONFIRMATION).showAndWait().get() == ButtonType.OK) {
+                        if (S_PASSENGER.addPassenger(new Passenger(fullName, email, phone))) {
+                            List<Passenger> list = S_PASSENGER.getListPassenger();
+                            Passenger p = list.get(list.size() - 1);
+                            Ticket ticket = new Ticket(trip.getId(), p.getId(), staff_id, seat.getId(), departure, destination, price, true);
+                            if (S_TICKET.addTicket(ticket) 
+                                    && S_SEAT.updateSeatStatus(seat.getId(), true)) {
+                                cbbSeats.setItems(FXCollections.observableList(S_SEAT.getListSeatByIdBus(tableSellTicket.getSelectionModel().getSelectedItem().getId_bus())));
+                                Utils.getBox("Sale successful!", Alert.AlertType.INFORMATION).show();
+                                FXMLLoader load = new FXMLLoader(getClass().getResource("FXMLPrintTicket.fxml"));
+                                stage = new Stage();
+                                scene = new Scene(load.load());
+                                FXMLPrintController controller = load.getController();
+                                controller.setTicket(ticket);
+                                controller.load();
+                                stage.setScene(scene);
+                                stage.show();
+                            }
+                            else {
+                                Utils.getBox("Sale Failed!", Alert.AlertType.ERROR).show();
+                            }
+                        }
+                        else {
+                            Utils.getBox("Sale Failed!", Alert.AlertType.ERROR).show();
+                        }
+                    }
+                }
+            }
+            else {
+                Utils.getBox("Please choose a trip on trip table!", Alert.AlertType.WARNING).show();
+            }
+        }
     }
     
     public void backHandler(ActionEvent event) throws IOException {

@@ -37,7 +37,7 @@
             <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textOUBUS" text="OU BUS" />
             <Button mnemonicParsing="false" onAction="#sellTicketHandler" styleClass="buttonTicket" text="Sell ticket" />
             <Button layoutX="59.0" layoutY="287.0" mnemonicParsing="false" onAction="#bookTicketHandler" styleClass="buttonTicket" text="Book ticket" />
-            <Button layoutX="59.0" layoutY="377.0" mnemonicParsing="false" styleClass="buttonTicket" text="Cancel &amp; Change" />
+            <Button layoutX="59.0" layoutY="377.0" mnemonicParsing="false" onAction="#changeAndCancelHandler" styleClass="buttonTicket" text="Cancel &amp; Change" />
             <Button layoutX="59.0" layoutY="422.0" mnemonicParsing="false" onAction="#logoutHandler" styleClass="buttonTicket" text="Log out" />
          </children>
       </VBox>
@@ -51,7 +51,7 @@
             <TextField fx:id="txtPassengerName" prefHeight="26.0" prefWidth="217.0" promptText="Enter passenger name ..." />
          </children>
       </HBox>
-      <TableView fx:id="tableTickets" layoutX="151.0" layoutY="40.0" onSort="#logoutHandler" prefHeight="460.0" prefWidth="849.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="151.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0">
+      <TableView fx:id="tableTickets" layoutX="151.0" layoutY="40.0" prefHeight="460.0" prefWidth="849.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="151.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0">
         <columns>
           <TableColumn fx:id="columnTicketID" prefWidth="75.0" styleClass="columnID" text="ID" />
           <TableColumn fx:id="columnPassengerName" prefWidth="75.0" styleClass="columnPassengerName" text="Passenger name" />

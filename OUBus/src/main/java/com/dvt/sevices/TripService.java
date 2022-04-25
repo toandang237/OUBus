@@ -8,7 +8,6 @@ import com.dvt.pojo.Bus;
 import com.dvt.pojo.Trip;
 import com.dvt.utils.JdbcUtils;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -55,6 +54,8 @@ public class TripService {
     }
     
     public List<Trip> getListTrip(String kw, String date) throws SQLException {
+        if (kw == null)
+            kw = "";
         List<Trip> list = new ArrayList<>();
         for (Trip trip: getListTrip(kw)) {
             if (trip.getDate().equals(date)) {

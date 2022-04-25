@@ -133,6 +133,17 @@ public class FXMLStaffController implements Initializable {
         stage.setScene(scene);
         stage.show();
     }
+    
+    public void changeAndCancelHandler(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("FXMLChangeAndCancelTicket.fxml"));
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(loader.load());
+        FXMLChangeAndCancelTicketController controller = loader.getController();
+        controller.setUser(user);
+        controller.load();
+        stage.setScene(scene);
+        stage.show();
+    }
      
     public void setUser(User user) {
         this.user = user;
