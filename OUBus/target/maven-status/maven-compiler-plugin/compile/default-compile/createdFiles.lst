@@ -9,6 +9,7 @@ com\dvt\pojo\Ticket.class
 com\dvt\sevices\PassengerService.class
 com\dvt\sevices\TicketService.class
 com\dvt\sevices\TripService.class
+com\dvt\oubus\FXMLChangeAndCancelTicketController.class
 com\dvt\sevices\BusService.class
 com\dvt\pojo\Bus.class
 com\dvt\oubus\FXMLManagerController.class

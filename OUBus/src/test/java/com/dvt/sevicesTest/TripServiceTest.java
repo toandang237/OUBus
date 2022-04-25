@@ -47,7 +47,7 @@ public class TripServiceTest {
             try{
                 conn.close();
             }catch(SQLException ex){
-                Logger.getLogger(TripService.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(TripServiceTest.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }
@@ -56,15 +56,15 @@ public class TripServiceTest {
     public void getListTrip() throws SQLException{
         Statement stm = conn.createStatement();
         ResultSet rs = stm.executeQuery("SELECT * FROM Trip");
-        
+        String nameTrip = "SG-NT";
         List<String> kq = new ArrayList<>();
         while(rs.next()){
             String name = rs.getString("name");
             kq.add(name);
         }
         
-        Set<String> kq2 = new HashSet<>(kq);
-        Assertions.assertEquals(kq.size(), kq2.size());
+        boolean b = kq.contains(nameTrip);
+        Assertions.assertTrue(b);
     }
     
     @Test
@@ -84,7 +84,7 @@ public class TripServiceTest {
     }
     
     @Test
-    public void addTripFail() throws SQLException, ParseException {
+    public void addTripSuccessful() throws SQLException, ParseException {
         
         Trip tr = new Trip(10, "SG-LD", "2022-04-28", "11:15");
         Assertions.assertTrue(t.addTrip(tr));

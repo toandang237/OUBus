@@ -78,19 +78,18 @@ public class BusServiceTest {
         Assertions.assertEquals(kq.size(), kq2.size());
     }
     @Test
-    public void testGet() throws Exception {
+    public void testGetName() throws Exception {
         Statement stm = conn.createStatement();
         ResultSet rs = stm.executeQuery("SELECT * FROM bus");
-
+        String nameBus = "TOAN";
         List <String> kq = new ArrayList<>();
         while(rs.next()){
             String name = rs.getString("name");
             kq.add(name);
         }
 
-        Set <String> kq2 = new HashSet<>(kq);
-
-        Assertions.assertEquals(kq.size(), kq2.size());
+        boolean b = kq.contains(nameBus);
+        Assertions.assertTrue(b);
     }
     
     @Test

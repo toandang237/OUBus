@@ -5,7 +5,6 @@
 package com.dvt.sevicesTest;
 
 import com.dvt.pojo.User;
-import com.dvt.sevices.SeatService;
 import com.dvt.sevices.UserSevices;
 import com.dvt.utils.JdbcUtils;
 import java.sql.Connection;
@@ -29,16 +28,16 @@ import org.junit.jupiter.api.Test;
  */
 public class UserServiceTest {
     private static Connection conn;
-    private static UserServiceTest us;
+    private static UserSevices us;
     
     @BeforeAll
     public static void beforeAll() {
         try{
             conn = JdbcUtils.getConn();
         }catch(SQLException ex){
-            Logger.getLogger(BusServiceTest.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(UserServiceTest.class.getName()).log(Level.SEVERE, null, ex);
         } 
-        us = new UserServiceTest();
+        us = new UserSevices();
     }
     
     @AfterAll
@@ -47,7 +46,7 @@ public class UserServiceTest {
             try {
                 conn.close();
             } catch (SQLException ex) {
-                Logger.getLogger(BusServiceTest.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(UserServiceTest.class.getName()).log(Level.SEVERE, null, ex);
             }
     }
     
@@ -61,7 +60,7 @@ public class UserServiceTest {
 //        System.out.println(u.getEmail());
         Statement stm = conn.createStatement();
         ResultSet rs = stm.executeQuery("SELECT * FROM user");
-        String username = "vu";
+        String username = "toan";
         List<String> list = new ArrayList<>();
         while(rs.next()){
             String name = rs.getString("name");
@@ -71,6 +70,8 @@ public class UserServiceTest {
         
         Assertions.assertTrue(b);
     }
+    
+    
     
     
 }

@@ -5,7 +5,7 @@
 package com.dvt.sevices;
 
 import com.dvt.pojo.Passenger;
-import com.dvt.sevicesTest.BusServiceTest;
+import com.dvt.sevices.PassengerService;
 import com.dvt.utils.JdbcUtils;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -17,13 +17,10 @@ import java.util.List;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
 
 /**
  *
@@ -31,16 +28,16 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 public class PassengerServiceTest {
     private static Connection conn;
-    private static PassengerService s;
+    private static PassengerService ps;
     
     @BeforeAll
     public static void beforeAll() throws SQLException {
        try{
             conn = JdbcUtils.getConn();
         }catch(SQLException ex){
-            Logger.getLogger(BusServiceTest.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PassengerServiceTest.class.getName()).log(Level.SEVERE, null, ex);
         } 
-        s = new PassengerService();
+        ps = new PassengerService();
     }
     
     @AfterAll
@@ -49,7 +46,7 @@ public class PassengerServiceTest {
             try {
                 conn.close();
             } catch (SQLException ex) {
-                Logger.getLogger(BusServiceTest.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(PassengerServiceTest.class.getName()).log(Level.SEVERE, null, ex);
             }
     }
     

@@ -35,7 +35,7 @@ public class SeatServiceTest {
         try{
             conn = JdbcUtils.getConn();
         }catch(SQLException ex){
-            Logger.getLogger(BusServiceTest.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SeatServiceTest.class.getName()).log(Level.SEVERE, null, ex);
         } 
         s = new SeatService();
     }
@@ -46,7 +46,7 @@ public class SeatServiceTest {
             try {
                 conn.close();
             } catch (SQLException ex) {
-                Logger.getLogger(BusServiceTest.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(SeatServiceTest.class.getName()).log(Level.SEVERE, null, ex);
             }
     }
     
